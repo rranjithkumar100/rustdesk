@@ -48,11 +48,12 @@ Please download Sciter dynamic library yourself.
 
 ## 📱 Building for Android
 
-### Linux Build
-**For complete Linux Android build instructions, see [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)**
+### 🎯 **New to this project? Start here:**
+**[FLUTTER_DEVELOPER_SETUP_GUIDE.md](FLUTTER_DEVELOPER_SETUP_GUIDE.md)** - Complete step-by-step guide for Flutter developers (junior-friendly!)
 
-### macOS Build
-**For complete macOS Android build instructions, see [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)**
+### Platform-Specific Guides:
+- **Linux Build:** [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)
+- **macOS Build:** [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)
 
 This repository includes comprehensive, enterprise-ready guides for building RustDesk Android APKs with verified working configurations:
 
