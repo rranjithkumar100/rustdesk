@@ -48,9 +48,13 @@ Please download Sciter dynamic library yourself.
 
 ## 📱 Building for Android
 
-**For complete Android build instructions, see [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)**
+### Linux Build
+**For complete Linux Android build instructions, see [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)**
 
-This repository includes a comprehensive, enterprise-ready guide for building RustDesk Android APKs with a verified working configuration:
+### macOS Build
+**For complete macOS Android build instructions, see [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)**
+
+This repository includes comprehensive, enterprise-ready guides for building RustDesk Android APKs with verified working configurations:
 
 - ✅ **Verified Environment:** Flutter 3.24.5 (stable) + Java 17 LTS + Gradle 8.5
 - 📋 **Step-by-Step Commands:** Complete setup from scratch to APK (all copy-paste ready)
@@ -59,21 +63,30 @@ This repository includes a comprehensive, enterprise-ready guide for building Ru
 - 🐛 **Troubleshooting:** Common errors and solutions
 - ⏱️ **Build Times:** ~15-20 min first build, ~2-3 min incremental
 
-The guide covers:
-- System dependencies (Ubuntu/Debian-based)
+The guides cover:
+- System dependencies (Ubuntu/Debian for Linux, Homebrew for macOS)
 - Flutter SDK installation and version switching
 - Android SDK/NDK setup
 - Rust toolchain configuration
 - vcpkg C++ dependencies
 - Native library compilation
 - Flutter APK build process
+- Automated plugin fixes for AGP 8+ compatibility
 - Clean install procedures
 
-**Quick Start:**
+**Quick Start (Linux):**
 ```sh
 # See ANDROID_BUILD_README.md for full instructions
 cd flutter
 bash build_android.sh arm64-v8a
+```
+
+**Quick Start (macOS):**
+```sh
+# See MACOS_ANDROID_BUILD.md for full instructions
+cd flutter
+bash fix_android_plugins_macos.sh  # Fix plugins first
+flutter build apk --target-platform android-arm64 --release
 ```
 
 For environment details and configuration reference, see [ANDROID_BUILD_ENVIRONMENT.md](ANDROID_BUILD_ENVIRONMENT.md).
