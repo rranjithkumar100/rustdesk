@@ -18,7 +18,6 @@ fi
 fix_plugin() {
     local plugin_name=$1
     local namespace=$2
-    local remove_manifest_package=$3
     
     echo "🔍 Looking for plugin: $plugin_name"
     
@@ -31,10 +30,19 @@ fix_plugin() {
     fi
     
     BUILD_GRADLE="${PLUGIN_DIR}/android/build.gradle"
+    MANIFEST="${PLUGIN_DIR}/android/src/main/AndroidManifest.xml"
     
     if [ ! -f "$BUILD_GRADLE" ]; then
         echo "   ⚠️  build.gradle not found"
         return
+    fi
+    
+    # ALWAYS remove package attribute from AndroidManifest.xml first
+    if [ -f "$MANIFEST" ] && grep -q "package=" "$MANIFEST"; then
+        echo "   📝 Removing deprecated package attribute from AndroidManifest.xml"
+        sed -i '' 's/ package="[^"]*"//g' "$MANIFEST"
+        sed -i '' 's/package="[^"]*" //g' "$MANIFEST"
+        echo "   ✅ Removed package attribute"
     fi
     
     # Add namespace if not present
@@ -46,12 +54,13 @@ fix_plugin() {
         echo "   ✅ Added namespace"
     else
         # Update namespace if it's wrong
-        if grep -q 'namespace "com.github.flutterkeyboardvisibility"' "$BUILD_GRADLE" 2>/dev/null; then
-            echo "   📝 Correcting namespace"
-            sed -i '' 's/namespace "com.github.flutterkeyboardvisibility"/namespace "com.jrai.flutter_keyboard_visibility"/' "$BUILD_GRADLE"
+        CURRENT_NAMESPACE=$(grep "namespace" "$BUILD_GRADLE" | sed 's/.*namespace "\([^"]*\)".*/\1/')
+        if [ "$CURRENT_NAMESPACE" != "$namespace" ]; then
+            echo "   📝 Correcting namespace from $CURRENT_NAMESPACE to $namespace"
+            sed -i '' "s|namespace \"$CURRENT_NAMESPACE\"|namespace \"$namespace\"|" "$BUILD_GRADLE"
             echo "   ✅ Corrected namespace"
         else
-            echo "   ✓ Namespace already present"
+            echo "   ✓ Namespace already correct"
         fi
     fi
     
@@ -66,30 +75,23 @@ fix_plugin() {
         echo "   ✅ Added kotlinOptions"
     fi
     
-    # Remove package attribute from AndroidManifest.xml if needed
-    if [ "$remove_manifest_package" = "true" ]; then
-        MANIFEST="${PLUGIN_DIR}/android/src/main/AndroidManifest.xml"
-        if [ -f "$MANIFEST" ] && grep -q "package=" "$MANIFEST"; then
-            echo "   📝 Removing deprecated package attribute from AndroidManifest.xml"
-            sed -i '' "s/package=\"[^\"]*\"//" "$MANIFEST"
-            echo "   ✅ Removed package attribute"
-        fi
-    fi
-    
     echo ""
 }
 
 # Fix all problematic plugins
-fix_plugin "external_path" "com.pinciat.external_path" "false"
-fix_plugin "flutter_keyboard_visibility" "com.jrai.flutter_keyboard_visibility" "true"
-fix_plugin "sqflite" "com.github.sqflite" "false"
-fix_plugin "qr_code_scanner" "net.touchcapture.qr.flutterqr" "false"
-fix_plugin "device_info_plus" "dev.fluttercommunity.plus.device_info" "false"
-fix_plugin "url_launcher" "io.flutter.plugins.urllauncher" "false"
-fix_plugin "path_provider" "io.flutter.plugins.pathprovider" "false"
-fix_plugin "package_info_plus" "dev.fluttercommunity.plus.package_info" "false"
-fix_plugin "shared_preferences" "io.flutter.plugins.sharedpreferences" "false"
-fix_plugin "image_picker_android" "io.flutter.plugins.imagepicker" "false"
+fix_plugin "external_path" "com.pinciat.external_path"
+fix_plugin "flutter_keyboard_visibility" "com.jrai.flutter_keyboard_visibility"
+fix_plugin "sqflite" "com.tekartik.sqflite"
+fix_plugin "qr_code_scanner" "net.touchcapture.qr.flutterqr"
+fix_plugin "device_info_plus" "dev.fluttercommunity.plus.device_info"
+fix_plugin "url_launcher" "io.flutter.plugins.urllauncher"
+fix_plugin "path_provider" "io.flutter.plugins.pathprovider"
+fix_plugin "package_info_plus" "dev.fluttercommunity.plus.package_info"
+fix_plugin "shared_preferences" "io.flutter.plugins.sharedpreferences"
+fix_plugin "image_picker_android" "io.flutter.plugins.imagepicker"
+fix_plugin "permission_handler_android" "com.baseflow.permissionhandler"
+fix_plugin "wakelock" "creativemaybeno.wakelock"
+fix_plugin "desktop_multi_window" "com.leanflutter.desktop_multi_window"
 
 # Fix uni_links (git dependency)
 echo "🔍 Looking for plugin: uni_links (git)"
