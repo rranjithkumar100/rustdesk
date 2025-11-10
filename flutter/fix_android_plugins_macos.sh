@@ -55,6 +55,17 @@ fix_plugin() {
         fi
     fi
     
+    # Add kotlinOptions if not present (for Kotlin plugins)
+    if grep -q "kotlin" "$BUILD_GRADLE" && ! grep -q "kotlinOptions" "$BUILD_GRADLE"; then
+        echo "   📝 Adding kotlinOptions for JVM target compatibility"
+        sed -i '' "/android {/a\\
+    kotlinOptions {\\
+        jvmTarget = \"1.8\"\\
+    }\\
+" "$BUILD_GRADLE"
+        echo "   ✅ Added kotlinOptions"
+    fi
+    
     # Remove package attribute from AndroidManifest.xml if needed
     if [ "$remove_manifest_package" = "true" ]; then
         MANIFEST="${PLUGIN_DIR}/android/src/main/AndroidManifest.xml"
