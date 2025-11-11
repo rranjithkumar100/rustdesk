@@ -46,6 +46,52 @@ Please download Sciter dynamic library yourself.
 [Linux](https://raw.githubusercontent.com/c-smile/sciter-sdk/master/bin.lnx/x64/libsciter-gtk.so) |
 [macOS](https://raw.githubusercontent.com/c-smile/sciter-sdk/master/bin.osx/libsciter.dylib)
 
+## 📱 Building for Android
+
+### 🎯 **New to this project? Start here:**
+**[FLUTTER_DEVELOPER_SETUP_GUIDE.md](FLUTTER_DEVELOPER_SETUP_GUIDE.md)** - Complete step-by-step guide for Flutter developers (junior-friendly!)
+
+### Platform-Specific Guides:
+- **Linux Build:** [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)
+- **macOS Build:** [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)
+
+This repository includes comprehensive, enterprise-ready guides for building RustDesk Android APKs with verified working configurations:
+
+- ✅ **Verified Environment:** Flutter 3.24.5 (stable) + Java 17 LTS + Gradle 8.5
+- 📋 **Step-by-Step Commands:** Complete setup from scratch to APK (all copy-paste ready)
+- 🔄 **Version Management:** How to downgrade/upgrade Flutter versions
+- 🧹 **Clean Install Guide:** Commands to reset and rebuild from scratch
+- 🐛 **Troubleshooting:** Common errors and solutions
+- ⏱️ **Build Times:** ~15-20 min first build, ~2-3 min incremental
+
+The guides cover:
+- System dependencies (Ubuntu/Debian for Linux, Homebrew for macOS)
+- Flutter SDK installation and version switching
+- Android SDK/NDK setup
+- Rust toolchain configuration
+- vcpkg C++ dependencies
+- Native library compilation
+- Flutter APK build process
+- Automated plugin fixes for AGP 8+ compatibility
+- Clean install procedures
+
+**Quick Start (Linux):**
+```sh
+# See ANDROID_BUILD_README.md for full instructions
+cd flutter
+bash build_android.sh arm64-v8a
+```
+
+**Quick Start (macOS):**
+```sh
+# See MACOS_ANDROID_BUILD.md for full instructions
+cd flutter
+bash fix_android_plugins_macos.sh  # Fix plugins first
+flutter build apk --target-platform android-arm64 --release
+```
+
+For environment details and configuration reference, see [ANDROID_BUILD_ENVIRONMENT.md](ANDROID_BUILD_ENVIRONMENT.md).
+
 ## Raw Steps to build
 
 - Prepare your Rust development env and C++ build env
