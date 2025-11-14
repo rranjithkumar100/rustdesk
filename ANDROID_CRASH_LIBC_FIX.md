@@ -10,6 +10,20 @@ java.lang.UnsatisfiedLinkError: dlopen failed: library "libc++_shared.so" not fo
 needed by /data/app/.../librustdesk.so in namespace clns-7
 ```
 
+## ⚠️ **CRITICAL: Read This First**
+
+If you're seeing this error, it means **the APK was built without the required native libraries**. Before following the fix steps below, please read:
+
+**[ANDROID_BUILD_PREREQUISITES.md](./ANDROID_BUILD_PREREQUISITES.md)** - Explains what you MUST have installed BEFORE building the APK.
+
+**Quick Check:** Do you have these installed?
+- ❓ Android NDK
+- ❓ Rust with Android targets
+- ❓ cargo-ndk
+- ❓ Pre-built Rust library in `target/aarch64-linux-android/release/`
+
+If **NO** to any of the above, the fix steps below won't work until you install the prerequisites.
+
 ---
 
 ## 🔍 Root Cause

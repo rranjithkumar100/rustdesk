@@ -53,6 +53,7 @@ Please download Sciter dynamic library yourself.
 
 ### 🚨 **APK Issues?**
 Common Android APK problems and solutions:
+- **⚠️ MUST READ FIRST:** [ANDROID_BUILD_PREREQUISITES.md](ANDROID_BUILD_PREREQUISITES.md) - Required tools and libraries
 - **Installation Failed:** [ANDROID_INVALID_PACKAGE_FIX.md](ANDROID_INVALID_PACKAGE_FIX.md) - "Package appears to be invalid"
 - **App Crashes on Launch:** [ANDROID_CRASH_LIBC_FIX.md](ANDROID_CRASH_LIBC_FIX.md) - "libc++_shared.so not found"
 - **Quick Reference:** [flutter/QUICK_FIX_INVALID_PACKAGE.md](flutter/QUICK_FIX_INVALID_PACKAGE.md)
