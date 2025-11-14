@@ -58,9 +58,11 @@ Common Android APK problems and solutions:
 - **App Crashes on Launch:** [ANDROID_CRASH_LIBC_FIX.md](ANDROID_CRASH_LIBC_FIX.md) - "libc++_shared.so not found"
 - **Quick Reference:** [flutter/QUICK_FIX_INVALID_PACKAGE.md](flutter/QUICK_FIX_INVALID_PACKAGE.md)
 
-### Platform-Specific Guides:
-- **Linux Build:** [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)
-- **macOS Build:** [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)
+### Platform-Specific Build Guides:
+- **🍎 macOS:** [MACOS_QUICK_START.md](MACOS_QUICK_START.md) - **Quick start for MacBook** (copy-paste ready!)
+  - Full guide: [ANDROID_BUILD_MACOS_COMPLETE.md](ANDROID_BUILD_MACOS_COMPLETE.md)
+  - Alternative: [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)
+- **🐧 Linux:** [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)
 
 This repository includes comprehensive, enterprise-ready guides for building RustDesk Android APKs with verified working configurations:
 
