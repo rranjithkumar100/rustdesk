@@ -1,10 +1,10 @@
 #!/bin/bash
-# Script to fix Flutter plugin namespace issues for Android builds on macOS
+# Script to fix Flutter plugin namespace issues for Android builds on Linux
 # This is required for AGP 8+ compatibility
 
 set -e
 
-echo "🔧 Fixing Flutter Android plugins for macOS build..."
+echo "🔧 Fixing Flutter Android plugins for Linux build..."
 echo ""
 
 PUB_CACHE="${HOME}/.pub-cache"
@@ -40,24 +40,22 @@ fix_plugin() {
     # ALWAYS remove package attribute from AndroidManifest.xml first
     if [ -f "$MANIFEST" ] && grep -q "package=" "$MANIFEST"; then
         echo "   📝 Removing deprecated package attribute from AndroidManifest.xml"
-        sed -i '' 's/ package="[^"]*"//g' "$MANIFEST"
-        sed -i '' 's/package="[^"]*" //g' "$MANIFEST"
+        sed -i 's/ package="[^"]*"//g' "$MANIFEST"
+        sed -i 's/package="[^"]*" //g' "$MANIFEST"
         echo "   ✅ Removed package attribute"
     fi
     
     # Add namespace if not present
     if ! grep -q "namespace" "$BUILD_GRADLE"; then
         echo "   📝 Adding namespace: $namespace"
-        sed -i '' "/android {/a\\
-    namespace \"${namespace}\"\\
-" "$BUILD_GRADLE"
+        sed -i "/android {/a\\    namespace \"${namespace}\"" "$BUILD_GRADLE"
         echo "   ✅ Added namespace"
     else
         # Update namespace if it's wrong
         CURRENT_NAMESPACE=$(grep "namespace" "$BUILD_GRADLE" | sed 's/.*namespace "\([^"]*\)".*/\1/')
         if [ "$CURRENT_NAMESPACE" != "$namespace" ]; then
             echo "   📝 Correcting namespace from $CURRENT_NAMESPACE to $namespace"
-            sed -i '' "s|namespace \"$CURRENT_NAMESPACE\"|namespace \"$namespace\"|" "$BUILD_GRADLE"
+            sed -i "s|namespace \"$CURRENT_NAMESPACE\"|namespace \"$namespace\"|" "$BUILD_GRADLE"
             echo "   ✅ Corrected namespace"
         else
             echo "   ✓ Namespace already correct"
@@ -67,11 +65,7 @@ fix_plugin() {
     # Add kotlinOptions if not present (for Kotlin plugins)
     if grep -q "kotlin" "$BUILD_GRADLE" && ! grep -q "kotlinOptions" "$BUILD_GRADLE"; then
         echo "   📝 Adding kotlinOptions for JVM target compatibility"
-        sed -i '' "/android {/a\\
-    kotlinOptions {\\
-        jvmTarget = \"1.8\"\\
-    }\\
-" "$BUILD_GRADLE"
+        sed -i "/android {/a\\    kotlinOptions {\\n        jvmTarget = \"1.8\"\\n    }" "$BUILD_GRADLE"
         echo "   ✅ Added kotlinOptions"
     fi
     
@@ -98,11 +92,20 @@ echo "🔍 Looking for plugin: uni_links (git)"
 UNI_LINKS=$(find "$PUB_CACHE/git" -name "uni_links" -type d 2>/dev/null | head -1)
 if [ -n "$UNI_LINKS" ]; then
     BUILD_GRADLE="${UNI_LINKS}/android/build.gradle"
+    MANIFEST="${UNI_LINKS}/android/src/main/AndroidManifest.xml"
+    
+    # Remove package attribute from manifest
+    if [ -f "$MANIFEST" ] && grep -q "package=" "$MANIFEST"; then
+        echo "   📝 Removing package attribute from AndroidManifest.xml"
+        sed -i 's/ package="[^"]*"//g' "$MANIFEST"
+        sed -i 's/package="[^"]*" //g' "$MANIFEST"
+        echo "   ✅ Removed package attribute"
+    fi
+    
+    # Add namespace if not present
     if [ -f "$BUILD_GRADLE" ] && ! grep -q "namespace" "$BUILD_GRADLE"; then
         echo "   📝 Adding namespace: name.avioli.unilinks"
-        sed -i '' '/android {/a\
-    namespace "name.avioli.unilinks"
-' "$BUILD_GRADLE"
+        sed -i '/android {/a\    namespace "name.avioli.unilinks"' "$BUILD_GRADLE"
         echo "   ✅ Added namespace"
     else
         echo "   ✓ Namespace already present"
@@ -116,7 +119,7 @@ echo "✅ All plugin fixes applied!"
 echo ""
 echo "📋 Next steps:"
 echo "   1. Clean Gradle cache: rm -rf ~/.gradle/caches"
-echo "   2. Clean Flutter: flutter clean"
+echo "   2. Clean Flutter: cd /workspace/flutter && flutter clean"
 echo "   3. Get dependencies: flutter pub get"
 echo "   4. Build APK: flutter build apk --target-platform android-arm64 --release"
 echo ""

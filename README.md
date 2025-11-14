@@ -51,6 +51,11 @@ Please download Sciter dynamic library yourself.
 ### 🎯 **New to this project? Start here:**
 **[FLUTTER_DEVELOPER_SETUP_GUIDE.md](FLUTTER_DEVELOPER_SETUP_GUIDE.md)** - Complete step-by-step guide for Flutter developers (junior-friendly!)
 
+### 🚨 **APK Installation Issues?**
+If you encounter **"App not installed as package appears to be invalid"** error:
+- **Quick Fix:** [flutter/QUICK_FIX_INVALID_PACKAGE.md](flutter/QUICK_FIX_INVALID_PACKAGE.md)
+- **Detailed Guide:** [ANDROID_INVALID_PACKAGE_FIX.md](ANDROID_INVALID_PACKAGE_FIX.md)
+
 ### Platform-Specific Guides:
 - **Linux Build:** [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)
 - **macOS Build:** [MACOS_ANDROID_BUILD.md](MACOS_ANDROID_BUILD.md)
