@@ -1,6 +1,6 @@
-# Quick Fix: "App Not Installed as Package Appears to be Invalid"
+# Quick Fix: Android APK Issues
 
-## 🚀 One-Command Fix
+## 🚨 Issue 1: "App Not Installed as Package Appears to be Invalid"
 
 ### For Linux/Ubuntu:
 ```bash
@@ -11,6 +11,20 @@ cd /workspace/flutter && ./fix_invalid_package.sh
 ```bash
 cd /workspace/flutter && ./fix_android_plugins_macos.sh && flutter clean && flutter pub get
 ```
+
+---
+
+## 🚨 Issue 2: App Crashes with "libc++_shared.so not found"
+
+### Quick Fix:
+```bash
+cd /workspace/flutter
+./copy_ndk_libs.sh
+flutter clean
+flutter build apk --target-platform android-arm64 --release
+```
+
+**See:** [ANDROID_CRASH_LIBC_FIX.md](../ANDROID_CRASH_LIBC_FIX.md) for details
 
 ---
 

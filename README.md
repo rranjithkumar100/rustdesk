@@ -51,10 +51,11 @@ Please download Sciter dynamic library yourself.
 ### 🎯 **New to this project? Start here:**
 **[FLUTTER_DEVELOPER_SETUP_GUIDE.md](FLUTTER_DEVELOPER_SETUP_GUIDE.md)** - Complete step-by-step guide for Flutter developers (junior-friendly!)
 
-### 🚨 **APK Installation Issues?**
-If you encounter **"App not installed as package appears to be invalid"** error:
-- **Quick Fix:** [flutter/QUICK_FIX_INVALID_PACKAGE.md](flutter/QUICK_FIX_INVALID_PACKAGE.md)
-- **Detailed Guide:** [ANDROID_INVALID_PACKAGE_FIX.md](ANDROID_INVALID_PACKAGE_FIX.md)
+### 🚨 **APK Issues?**
+Common Android APK problems and solutions:
+- **Installation Failed:** [ANDROID_INVALID_PACKAGE_FIX.md](ANDROID_INVALID_PACKAGE_FIX.md) - "Package appears to be invalid"
+- **App Crashes on Launch:** [ANDROID_CRASH_LIBC_FIX.md](ANDROID_CRASH_LIBC_FIX.md) - "libc++_shared.so not found"
+- **Quick Reference:** [flutter/QUICK_FIX_INVALID_PACKAGE.md](flutter/QUICK_FIX_INVALID_PACKAGE.md)
 
 ### Platform-Specific Guides:
 - **Linux Build:** [ANDROID_BUILD_README.md](ANDROID_BUILD_README.md)

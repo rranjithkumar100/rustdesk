@@ -107,6 +107,18 @@ android {
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        
+        ndk {
+            // Specify ABIs to include in the APK
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+    
+    // Package NDK shared libraries (including libc++_shared.so)
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 
     signingConfigs {

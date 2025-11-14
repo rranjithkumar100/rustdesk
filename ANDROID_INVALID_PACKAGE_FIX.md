@@ -359,5 +359,24 @@ If you continue to experience issues:
 
 ---
 
+## 🚨 Related Issue: App Crashes After Installation
+
+If the APK installs successfully but **crashes on launch** with:
+```
+java.lang.UnsatisfiedLinkError: dlopen failed: library "libc++_shared.so" not found
+```
+
+**Solution:** See [ANDROID_CRASH_LIBC_FIX.md](./ANDROID_CRASH_LIBC_FIX.md)
+
+**Quick Fix:**
+```bash
+cd /workspace/flutter
+./copy_ndk_libs.sh
+flutter clean
+flutter build apk --target-platform android-arm64 --release
+```
+
+---
+
 **Last Updated:** 2025-11-14  
 **Status:** ✅ Fixed and Documented
