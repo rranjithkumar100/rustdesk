@@ -114,6 +114,7 @@ cd flutter
 export VCPKG_ROOT=$HOME/vcpkg
 export ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk/25.1.8937393
 bash build_android_deps.sh arm64-v8a
+bash build_android_deps.sh x86_64
 ```
 
 ### Step 5: Build Rust Library
@@ -123,13 +124,18 @@ export ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk/25.1.8937393
 
 # Build library only (not binaries - they have duplicate symbol issues)
 cargo ndk --platform 21 --target aarch64-linux-android build --release --lib --features flutter
+cargo ndk --platform 21 --target x86_64-linux-android build --release --lib --features flutter
+
 ```
 
 ### Step 6: Copy Native Library
 ```bash
 mkdir -p flutter/android/app/src/main/jniLibs/arm64-v8a
-cp target/aarch64-linux-android/release/liblibrustdesk.so \
-   flutter/android/app/src/main/jniLibs/arm64-v8a/librustdesk.so
+mkdir -p flutter/android/app/src/main/jniLibs/x86_64
+
+
+cp target/aarch64-linux-android/release/liblibrustdesk.so flutter/android/app/src/main/jniLibs/arm64-v8a/librustdesk.so
+cp target/x86_64-linux-android/release/liblibrustdesk.so flutter/android/app/src/main/jniLibs/x86_64/librustdesk.so
 ```
 
 ### Step 7: Fix Flutter Plugins (REQUIRED)
