@@ -244,8 +244,6 @@ bash build_android_deps.sh arm64-v8a
 
 **Note:** If you need to build for other architectures:
 ```bash
-# For armeabi-v7a (32-bit ARM)
-bash build_android_deps.sh armeabi-v7a
 
 # For x86_64 (64-bit emulator)
 bash build_android_deps.sh x86_64
@@ -294,8 +292,6 @@ ls -lh target/aarch64-linux-android/release/liblibrustdesk.so
 
 **For other architectures:**
 ```bash
-# For armeabi-v7a (32-bit ARM)
-cargo ndk --platform 21 --target armv7-linux-androideabi build --release --features flutter
 
 # For x86_64 (emulator)
 cargo ndk --platform 21 --target x86_64-linux-android build --release --features flutter
@@ -319,10 +315,6 @@ ls -lh $HOME/rustdesk/flutter/android/app/src/main/jniLibs/arm64-v8a/librustdesk
 
 **For other architectures:**
 ```bash
-# For armeabi-v7a
-mkdir -p flutter/android/app/src/main/jniLibs/armeabi-v7a
-cp target/armv7-linux-androideabi/release/liblibrustdesk.so \
-   flutter/android/app/src/main/jniLibs/armeabi-v7a/librustdesk.so
 
 # For x86_64
 mkdir -p flutter/android/app/src/main/jniLibs/x86_64
